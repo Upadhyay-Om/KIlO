@@ -5,6 +5,10 @@
 #include <termios.h>
 #include <unistd.h>
 
+/*** defines ***/
+#define CTRL_KEY(k) ((k) & 0x1f)
+
+
 // Stores the terminal's original settings so they can be restored
 // before the program exits.
 struct termios orig_termios;
@@ -106,8 +110,9 @@ int main() {
         }
 
         // Quit when the user presses 'q'.
-        if (c == 'q')
+        if (c == CTRL_KEY('q')){
             break;
+        }
     }
 
     // disableRawMode() is automatically called by atexit().
